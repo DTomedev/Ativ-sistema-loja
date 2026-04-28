@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+:root {
+    --primary-vinho: #1E3A8A;       /* Azul Marinho Profundo */
+    --accent-red: #3B82F6;          /* Azul Vibrante de Ação */
+    --dark-bg: #0F172A;             /* Azul Petróleo Quase Preto */
+    --glass-white: rgba(255, 255, 255, 0.95);
+    --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #F1F5F9;            /* Cinza Azulado Leve */
+    color: #334155;                 /* Texto em Cinza Profundo */
+    overflow-x: hidden;
+}
+
+/* Background Decorativo */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; right: 0;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(30, 58, 138, 0.05) 0%, transparent 70%);
+    z-index: -1;
+}
+
+/* Navbar Minimalista */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 10%;
+    background: var(--glass-white);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.nav-logo {
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: var(--primary-vinho);
+    letter-spacing: -1px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #64748B;                 /* Texto Muted */
+    font-weight: 500;
+    margin-left: 2.5rem;
+    transition: var(--transition);
+    font-size: 0.9rem;
+}
+
+.nav-links a:hover {
+    color: var(--accent-red);
+}
+
+/* Hero Section High-End */
+.hero {
+    padding: 8rem 10% 4rem 10%;
+    max-width: 800px;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: var(--dark-bg);
+}
+
+.hero h1 span {
+    color: var(--primary-vinho);
+    position: relative;
+}
+
+.hero p {
+    font-size: 1.1rem;
+    color: #64748B;
+    border-left: 3px solid var(--accent-red);
+    padding-left: 20px;
+}
+
+/* Cards com Design Moderno */
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    padding: 4rem 10%;
+}
+
+.card {
+    background: white;
+    padding: 40px;
+    border-radius: 24px;
+    border: 1px solid rgba(0,0,0,0.03);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(30, 58, 138, 0.08);
+}
+
+.card i {
+    font-size: 2.5rem;
+    margin-bottom: 25px;
+    display: block;
+    background: linear-gradient(45deg, var(--primary-vinho), var(--accent-red));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: var(--dark-bg);
+}
+
+.card p {
+    color: #64748B;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* Botões Estilizados */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 30px;
+    padding: 12px 28px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.btn-main {
+    background: var(--dark-bg);
+    color: white;
+}
+
+.btn-main:hover {
+    background: var(--primary-vinho);
+    padding-right: 35px;
+}
+
+/* Footer Profissional */
+footer {
+    padding: 4rem 10%;
+    background: #F1F5F9;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #94A3B8;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}

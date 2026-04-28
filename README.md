@@ -1,10 +1,6 @@
 # Instalar as bibliotecas:
 pip install fastapi uvicorn sqlalchemy alembic python-dotenv jinja2 python-multipart
 
-# Rodar API
-no terminal: python -m uvicorn main:app --reload
-
-
 # No terminal inicie o alembic
 python -m alembic init alembic
 
@@ -12,3 +8,6 @@ python -m alembic init alembic
 alembic revision --autogenerate -m "criando tabelas"
       e
 alembic upgrade head
+
+# Rodar API
+no terminal: python -m uvicorn main:app --reload
