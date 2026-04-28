@@ -1,19 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
 :root {
-    --primary-vinho: #1E3A8A;       /* Azul Marinho Profundo */
-    --accent-red: #3B82F6;          /* Azul Vibrante de Ação */
+    --primary-blue: #1E3A8A;       /* Azul Marinho Profundo */
+    --accent-blue: #3B82F6;        /* Azul Vibrante de Ação */
     --dark-bg: #0F172A;             /* Azul Petróleo Quase Preto */
     --glass-white: rgba(255, 255, 255, 0.95);
     --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    --bg-body: #F1F5F9;
+}
+
+/* Estrutura para garantir rolagem e corpo sólido */
+html, body {
+    height: 100%;
 }
 
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    background: #F1F5F9;            /* Cinza Azulado Leve */
-    color: #334155;                 /* Texto em Cinza Profundo */
-    overflow-x: hidden;
+    background: var(--bg-body);
+    color: #334155;
+    display: flex;
+    flex-direction: column; /* Faz o footer ser empurrado para baixo */
+}
+
+main {
+    flex: 1 0 auto; /* Garante que o conteúdo cresça e permita rolagem */
 }
 
 /* Background Decorativo */
@@ -26,7 +37,7 @@ body::before {
     z-index: -1;
 }
 
-/* Navbar Minimalista */
+/* Navbar */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -43,54 +54,49 @@ body::before {
 .nav-logo {
     font-weight: 700;
     font-size: 1.4rem;
-    color: var(--primary-vinho);
+    color: var(--primary-blue);
     letter-spacing: -1px;
 }
 
 .nav-links a {
     text-decoration: none;
-    color: #64748B;                 /* Texto Muted */
+    color: #64748B;
     font-weight: 500;
     margin-left: 2.5rem;
     transition: var(--transition);
     font-size: 0.9rem;
 }
 
-.nav-links a:hover {
-    color: var(--accent-red);
-}
+.nav-links a:hover { color: var(--accent-blue); }
 
-/* Hero Section High-End */
+/* Hero Section */
 .hero {
-    padding: 8rem 10% 4rem 10%;
+    padding: 6rem 10% 2rem 10%;
     max-width: 800px;
 }
 
 .hero h1 {
-    font-size: 4rem;
+    font-size: 3.5rem;
     line-height: 1.1;
     margin-bottom: 1.5rem;
     color: var(--dark-bg);
 }
 
-.hero h1 span {
-    color: var(--primary-vinho);
-    position: relative;
-}
+.hero h1 span { color: var(--primary-blue); }
 
 .hero p {
     font-size: 1.1rem;
     color: #64748B;
-    border-left: 3px solid var(--accent-red);
+    border-left: 3px solid var(--accent-blue);
     padding-left: 20px;
 }
 
-/* Cards com Design Moderno */
+/* Grid e Cards */
 .container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 30px;
-    padding: 4rem 10%;
+    padding: 2rem 10% 4rem 10%;
 }
 
 .card {
@@ -100,8 +106,6 @@ body::before {
     border: 1px solid rgba(0,0,0,0.03);
     box-shadow: 0 10px 30px rgba(0,0,0,0.02);
     transition: var(--transition);
-    position: relative;
-    overflow: hidden;
 }
 
 .card:hover {
@@ -109,38 +113,62 @@ body::before {
     box-shadow: 0 20px 40px rgba(30, 58, 138, 0.08);
 }
 
-.card i {
-    font-size: 2.5rem;
-    margin-bottom: 25px;
-    display: block;
-    background: linear-gradient(45deg, var(--primary-vinho), var(--accent-red));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+/* Tabelas e Formulários (O "Corpo" do Sistema) */
+.data-table-container {
+    background: white;
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+    margin-bottom: 3rem;
 }
 
-.card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    text-align: left;
+    padding: 1.2rem;
     color: var(--dark-bg);
+    border-bottom: 2px solid var(--bg-body);
+    font-size: 0.8rem;
+    text-transform: uppercase;
 }
 
-.card p {
-    color: #64748B;
-    line-height: 1.6;
-    font-size: 0.95rem;
+td {
+    padding: 1.2rem;
+    border-bottom: 1px solid var(--bg-body);
 }
 
-/* Botões Estilizados */
+/* Inputs e Botões */
+input, select {
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    background: #F8FAFC;
+    font-family: inherit;
+    transition: var(--transition);
+    box-sizing: border-box;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
 .btn {
     display: inline-flex;
     align-items: center;
-    margin-top: 30px;
     padding: 12px 28px;
     border-radius: 50px;
     text-decoration: none;
     font-weight: 600;
-    font-size: 0.9rem;
     transition: var(--transition);
+    border: none;
+    cursor: pointer;
 }
 
 .btn-main {
@@ -149,17 +177,17 @@ body::before {
 }
 
 .btn-main:hover {
-    background: var(--primary-vinho);
+    background: var(--primary-blue);
     padding-right: 35px;
 }
 
-/* Footer Profissional */
+/* Footer Sólido no Fundo */
 footer {
-    padding: 4rem 10%;
-    background: #F1F5F9;
+    flex-shrink: 0;
+    padding: 3rem 10%;
+    background: white;
+    border-top: 1px solid rgba(0,0,0,0.05);
     text-align: center;
     font-size: 0.8rem;
     color: #94A3B8;
-    letter-spacing: 1px;
-    text-transform: uppercase;
 }

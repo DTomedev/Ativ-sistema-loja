@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categorias | TOMÉDELUXE</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo">LUXE<span style="color: #3B82F6;">POS</span></div>
+        <div class="nav-links">
+            <a href="/">Dashboard</a>
+            <a href="/categorias" style="color: var(--primary-blue); font-weight: 700;">Categorias</a>
+            <a href="/produtos">Produtos</a>
+        </div>
+    </nav>
+
+    <main>
+        <header class="hero">
+            <h1>Gestão de <span>Categorias</span></h1>
+            <p>Estruture sua loja definindo as classificações dos seus produtos para um controle preciso.</p>
+        </header>
+
+        <div class="container" style="display: grid; grid-template-columns: 1fr 1.8fr; align-items: start; gap: 40px;">
+            
+            <section class="card">
+                <div style="margin-bottom: 25px;">
+                    <i class="fa-solid fa-folder-plus"></i>
+                    <h3 style="margin: 10px 0;">Adicionar Nova</h3>
+                    <p style="font-size: 0.85rem; color: #64748B;">Crie grupos como 'Eletrônicos', 'Decoração' ou 'Papelaria'.</p>
+                </div>
+
+                <form action="/categorias" method="POST">
+                    <div class="form-group">
+                        <label for="nome">Nome da Categoria</label>
+                        <input type="text" id="nome" name="nome" placeholder="Ex: Vestuário" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-main" style="width: 100%; justify-content: center;">
+                        Finalizar Cadastro
+                    </button>
+                </form>
+            </section>
+
+            <section class="data-table-container">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3 style="margin: 0; font-size: 1.2rem; color: var(--dark-bg);">Categorias Ativas</h3>
+                    <span style="background: #E0F2FE; color: #0369A1; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;">
+                        {{ categorias|length }} TOTAL
+                    </span>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Nome da Seção</th>
+                            <th style="text-align: right;">Gerenciar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for categoria in categorias %}
+                        <tr>
+                            <td style="font-family: monospace; color: #94A3B8;">#{{ "%03d"|format(categoria.id) }}</td>
+                            <td style="font-weight: 600; color: var(--dark-bg);">{{ categoria.nome }}</td>
+                            <td style="text-align: right;">
+                                <a href="#" title="Editar" style="color: #64748B; margin-right: 15px; transition: 0.3s;"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="#" title="Excluir" style="color: #EF4444; transition: 0.3s;"><i class="fa-solid fa-trash"></i></a>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="3" style="text-align: center; padding: 5rem 0;">
+                                <i class="fa-solid fa-inbox" style="font-size: 2.5rem; color: #CBD5E1; margin-bottom: 15px; display: block;"></i>
+                                <span style="color: #94A3B8;">Nenhuma categoria encontrada no banco de dados.</span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div style="margin-bottom: 10px;">
+            <i class="fa-solid fa-shield-halved" style="color: var(--accent-blue);"></i>
+        </div>
+        &copy; 2026 LUXE POS — AMBIENTE ADMINISTRATIVO SEGURO
+    </footer>
+
+</body>
+</html>
