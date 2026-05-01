@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Produtos | TOMÉDELUXE</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo">TOMÉ<span style="color: black;">DELUXE</span></div>
+        <div class="nav-links">
+            <a href="./">início</a>
+            <a href="/">Dashboard</a>
+            <a href="/categorias">Categorias</a>
+            <a href="/produtos" style="color: var(--accent-blue); font-weight: 700;">Produtos</a>
+        </div>
+    </nav>
+
+    <main>
+        <header class="hero">
+            <h1>Estoque de <span>Produtos</span></h1>
+            <p>Gerencie seu inventário com precisão técnica.</p>
+        </header>
+
+        <div class="container" style="display: grid; grid-template-columns: 1fr 2.5fr; gap: 40px; align-items: start;">
+
+            <section class="card">
+                <div id="bloco-botao" style="text-align: center;">
+                    <i class="fa-solid fa-box-open"></i>
+                    <h3>Novo Item</h3>
+                    <button type="button" class="btn btn-main" onclick="mostrarFormulario()"
+                        style="width: 100%; justify-content: center;">
+                        Adicionar Produto
+                    </button>
+                </div>
+
+                <div id="bloco-formulario" style="display: none;">
+                    <h3 style="margin-bottom: 20px;">Cadastrar Produto</h3>
+                    <form action="/produtos" method="POST">
+                        <div class="form-group">
+                            <label>Nome do Produto</label>
+                            <input type="text" name="nome" placeholder="Ex: iPhone 15 Pro" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Preço (R$)</label>
+                            <input type="number" step="0.01" name="preco" placeholder="0.00" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Categoria</label>
+                            <select name="categoria_id" required>
+                                <option value="">Selecione...</option>
+                                {% for categoria in categorias %}
+                                <option value="{{ categoria.id }}">{{ categoria.nome }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Quantidade em Estoque</label>
+                            <input type="number" name="estoque" placeholder="Ex: 50" min="0" required>
+                        </div>
+                        <button type="submit" class="btn btn-main"
+                            style="width: 100%; justify-content: center;">Salvar</button>
+                        <button type="button" onclick="esconderFormulario()" class="btn"
+                            style="width: 100%; margin-top: 10px; background: #f1f5f9; color: #64748b; justify-content: center;">Cancelar</button>
+                    </form>
+                </div>
+            </section>
+
+            <section class="data-table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Categoria</th>
+                            <th>Preço</th>
+                            <th style="text-align: right;">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for produto in produtos %}
+                        <tr>
+                            <td>
+                                <div style="font-weight: 600;">{{ produto.nome }}</div>
+                                <div style="font-size: 0.75rem; color: #64748B;">
+                                    <i class="fa-solid fa-warehouse"></i> {{ produto.estoque }} unidades
+                                </div>
+                            </td>
+                            <td><span
+                                    style="background: #F1F5F9; padding: 4px 10px; border-radius: 8px; font-size: 0.8rem;">{{
+                                    produto.categoria.nome }}</span></td>
+                            <td style="font-weight: 700; color: var(--primary-blue);">R$ {{ "%.2f"|format(produto.preco)
+                                }}</td>
+
+                            <td style="text-align: right;">
+                                <div id="acoes-normais-{{ produto.id }}">
+                                    <a href="/produtos/{{ produto.id }}/editar"
+                                        style="color: #64748B; margin-right: 15px;"><i
+                                            class="fa-solid fa-pen-to-square"></i></a>
+                                    <button onclick="pedirConfirmacao('{{ produto.id }}')"
+                                        style="background:none; border:none; color:#EF4444; cursor:pointer;"><i
+                                            class="fa-solid fa-trash"></i></button>
+                                </div>
+                                <div id="confirmacao-{{ produto.id }}"
+                                    style="display: none; gap: 8px; justify-content: flex-end;">
+                                    <form action="/produtos/{{ produto.id }}/deletar" method="POST">
+                                        <button type="submit" class="btn"
+                                            style="background:#EF4444; color:white; padding: 5px 10px; font-size: 0.7rem;">Sim</button>
+                                    </form>
+                                    <button onclick="cancelarExclusao('{{ produto.id }}')" class="btn"
+                                        style="background:#F1F5F9; color:#64748B; padding: 5px 10px; font-size: 0.7rem;">Não</button>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </main>
+
+    <footer>&copy; 2026 TOMÉDELUXE — GESTÃO DE ESTÁVEL</footer>
+    <script src="/static/scripts.js"></script>
+</body>
+
+</html>

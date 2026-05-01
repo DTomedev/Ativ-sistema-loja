@@ -21,6 +21,7 @@ def exibir_home(request: Request):
 
     )
 
+#FUNÇÕES CATEGORIA
 #LISTAR
 @app.get("/categorias")
 def exibir_categorias(request: Request, db: Session = Depends(get_db)):
@@ -79,3 +80,38 @@ def atualizar_categoria(
         atualizao_categoria.descricao = descricao
         db.commit()
     return RedirectResponse(url="/categorias", status_code=303)
+
+
+#FUNÇÕES PRODUTOS
+#LISTAR
+@app.get("/produtos")
+def exibir_produtos(request: Request, db: Session = Depends(get_db)):
+    produtos = db.query(Produto).all()
+    categorias = db.query(Categoria).all()
+    return templates.TemplateResponse(
+        request,
+        "produtos.html",
+        {"request": request,
+         "produtos": produtos,
+         "categorias": categorias
+        }
+    )
+
+#CADASTRAR
+@app.post("/produtos")
+def cadastrar_produtos(
+    nome: str = Form(...),
+    preco: float = Form(...),
+    estoque: int = Form(...),
+    categoria_id: int = Form(...),
+    db: Session = Depends(get_db)
+):
+    novo_produto = Produto(
+        nome=nome,
+        preco=preco,
+        estoque=estoque,
+        categoria_id=categoria_id
+    )
+    db.add(novo_produto)
+    db.commit()
+    return RedirectResponse(url="/produtos", status_code=303)
