@@ -20,3 +20,12 @@ def exibir_home(request: Request):
         {"request": request}
 
     )
+
+@app.get("/categorias")
+def exibir_categorias(request: Request, db: Session = Depends(get_db)):
+    categorias = db.query(Categoria).all()
+    return templates.TemplateResponse(
+        request,
+        "categorias.html",
+        {"request": request}
+    )
