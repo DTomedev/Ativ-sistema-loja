@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,6 +26,7 @@
             <p>Estruture sua loja definindo as classificações dos seus produtos para um controle preciso.</p>
         </header>
 
+        <!--seção cadastrar categorias-->
         <div class="container" style="display: grid; grid-template-columns: 1fr 1.8fr; align-items: start; gap: 40px;">
             <section class="card" id="secao-cadastro">
                 <div id="bloco-botao" style="text-align: center; padding: 20px 0;">
@@ -72,6 +74,7 @@
                 </div>
             </section>
 
+            <!--seção categorias-->
             <section class="data-table-container">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                     <h3 style="margin: 0; font-size: 1.2rem; color: var(--dark-bg);">Categorias Ativas</h3>
@@ -89,20 +92,48 @@
                             <th style="text-align: right;">Gerenciar</th>
                         </tr>
                     </thead>
+                    <!--CATEGORIAS-->
                     <tbody>
                         {% for categoria in categorias %}
                         <tr>
                             <td style="font-family: monospace; color: #94A3B8;">#{{ "%03d"|format(categoria.id) }}</td>
                             <td style="font-weight: 600; color: var(--dark-bg);">{{ categoria.nome }}</td>
                             <td style="color: #64748B; font-size: 0.85rem;">{{ categoria.descricao }}</td>
-                            <td style="text-align: right;">
-                                <a href="#" title="Editar"
-                                    style="color: #64748B; margin-right: 15px; transition: 0.3s;"><i
-                                        class="fa-solid fa-pen-to-square"></i></a>
-                                <a href="#" title="Excluir" style="color: #EF4444; transition: 0.3s;"><i
-                                        class="fa-solid fa-trash"></i></a>
+                            <!--BOTÕES EDITAR/EXCLUIR-->
+                            <td style="text-align: right; min-width: 150px;">
+                                <div id="acoes-normais-{{ categoria.id }}"
+                                    style="display: flex; justify-content: flex-end; align-items: center;">
+                                    <a href="#" title="Editar"
+                                        style="color: #64748B; margin-right: 18px; transition: 0.3s; text-decoration: none;">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                    <button type="button" onclick="pedirConfirmacao('{{ categoria.id }}')" title="Excluir"
+                                        style="background: none; border: none; color: #EF4444; cursor: pointer; padding: 0;">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+
+                                <div id="confirmacao-{{ categoria.id }}"
+                                    style="display: none; justify-content: flex-end; align-items: center; gap: 8px;">
+                                    <span
+                                        style="font-size: 0.75rem; color: #EF4444; font-weight: 600; margin-right: 5px;">Excluir?</span>
+
+                                    <form action="/categorias/{{ categoria.id }}/deletar" method="POST"
+                                        style="margin: 0;">
+                                        <button type="submit"
+                                            style="background: #EF4444; color: white; border: none; padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; cursor: pointer; font-weight: 600;">
+                                            Sim
+                                        </button>
+                                    </form>
+
+                                    <button type="button" onclick="cancelarExclusao('{{ categoria.id }}')"
+                                        style="background: #F1F5F9; color: #64748B; border: none; padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; cursor: pointer; font-weight: 600;">
+                                        Não
+                                    </button>
+                                </div>
                             </td>
                         </tr>
+                        <!--CASO NÃO TENHA CATEGORIA-->
                         {% else %}
                         <tr>
                             <td colspan="3" style="text-align: center; padding: 5rem 0;">
@@ -117,14 +148,15 @@
             </section>
         </div>
     </main>
-
+<!--rodapé-->
     <footer>
         <div style="margin-bottom: 10px;">
             <i class="fa-solid fa-shield-halved" style="color: var(--accent-blue);"></i>
         </div>
         &copy; 2026 TOMÉDELUXE — AMBIENTE ADMINISTRATIVO SEGURO
     </footer>
-<script src="./static/scripts.js"></script>
+    <script src="./static/scripts.js"></script>
 
 </body>
+
 </html>

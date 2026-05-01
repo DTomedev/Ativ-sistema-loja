@@ -42,3 +42,11 @@ def cadastrar_categorias(
     db.add(nova_categoria)
     db.commit()
     return RedirectResponse(url="/categorias", status_code=303)
+
+@app.post("/categorias/{id}/deletar")
+def deletar_categoria(id: int, db: Session = Depends(get_db)):
+    categoria = db.query(Categoria).filter(Categoria.id == id).first()
+    if categoria:
+        db.delete(categoria)
+        db.commit()
+    return RedirectResponse(url="/categorias", status_code=303)
