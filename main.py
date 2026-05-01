@@ -21,6 +21,7 @@ def exibir_home(request: Request):
 
     )
 
+#LISTAR
 @app.get("/categorias")
 def exibir_categorias(request: Request, db: Session = Depends(get_db)):
     categorias = db.query(Categoria).all()
@@ -32,6 +33,7 @@ def exibir_categorias(request: Request, db: Session = Depends(get_db)):
         }
     )
 
+#CADASTRAR
 @app.post("/categorias")
 def cadastrar_categorias(
     nome: str = Form(...),
@@ -43,10 +45,37 @@ def cadastrar_categorias(
     db.commit()
     return RedirectResponse(url="/categorias", status_code=303)
 
+#DELETAR
 @app.post("/categorias/{id}/deletar")
 def deletar_categoria(id: int, db: Session = Depends(get_db)):
-    categoria = db.query(Categoria).filter(Categoria.id == id).first()
+    categoria = db.query(Categoria).filter_by(id=id).first()
     if categoria:
         db.delete(categoria)
+        db.commit()
+    return RedirectResponse(url="/categorias", status_code=303)
+
+#ATUALIZAR
+@app.get("/categorias/{id}/editar")
+def editar_categoria(id: int, request: Request, db: Session = Depends(get_db)):
+    categoria = db.query(Categoria).filter_by(id=id).first()
+    return templates.TemplateResponse(
+        request,
+        "atualizar_categoria.html",
+        {"request": request,
+         "categoria": categoria,
+        }
+    )
+
+@app.post("/categorias/{id}/editar")
+def atualizar_categoria(
+    id: int,
+    nome: str = Form(...),
+    descricao: str = Form(...),
+    db: Session = Depends(get_db)
+):
+    atualizao_categoria = db.query(Categoria).filter_by(id=id).first()
+    if atualizao_categoria:
+        atualizao_categoria.nome = nome
+        atualizao_categoria.descricao = descricao
         db.commit()
     return RedirectResponse(url="/categorias", status_code=303)

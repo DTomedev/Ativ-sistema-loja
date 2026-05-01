@@ -12,8 +12,9 @@
 <body>
 
     <nav class="navbar">
-        <div class="nav-logo">TOMÉ<span style="color: #3B82F6;">DELUXE</span></div>
+        <div class="nav-logo"> TOMÉ<span style="color: #000000;">DELUXE</span></div>
         <div class="nav-links">
+            <a href="./">Início</a>
             <a href="/">Dashboard</a>
             <a href="/categorias" style="color: var(--primary-blue); font-weight: 700;">Categorias</a>
             <a href="/produtos">Produtos</a>
@@ -103,7 +104,7 @@
                             <td style="text-align: right; min-width: 150px;">
                                 <div id="acoes-normais-{{ categoria.id }}"
                                     style="display: flex; justify-content: flex-end; align-items: center;">
-                                    <a href="#" title="Editar"
+                                    <a href="/categorias/{{ categoria.id }}/editar" title="Editar"
                                         style="color: #64748B; margin-right: 18px; transition: 0.3s; text-decoration: none;">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
