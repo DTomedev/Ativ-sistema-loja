@@ -27,5 +27,18 @@ def exibir_categorias(request: Request, db: Session = Depends(get_db)):
     return templates.TemplateResponse(
         request,
         "categorias.html",
-        {"request": request}
+        {"request": request,
+         "categorias": categorias
+        }
     )
+
+@app.post("/categorias")
+def cadastrar_categorias(
+    nome: str = Form(...),
+    descricao: str = Form(...),
+    db: Session = Depends(get_db)
+):
+    nova_categoria = Categoria(nome=nome, descricao=descricao)
+    db.add(nova_categoria)
+    db.commit()
+    return RedirectResponse(url="/categorias", status_code=303)

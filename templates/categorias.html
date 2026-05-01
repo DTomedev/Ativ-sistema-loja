@@ -7,10 +7,11 @@
     <link rel="stylesheet" href="/static/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
 
     <nav class="navbar">
-        <div class="nav-logo">LUXE<span style="color: #3B82F6;">POS</span></div>
+        <div class="nav-logo">TOMÉ<span style="color: #3B82F6;">DELUXE</span></div>
         <div class="nav-links">
             <a href="/">Dashboard</a>
             <a href="/categorias" style="color: var(--primary-blue); font-weight: 700;">Categorias</a>
@@ -25,30 +26,57 @@
         </header>
 
         <div class="container" style="display: grid; grid-template-columns: 1fr 1.8fr; align-items: start; gap: 40px;">
-            
-            <section class="card">
-                <div style="margin-bottom: 25px;">
-                    <i class="fa-solid fa-folder-plus"></i>
-                    <h3 style="margin: 10px 0;">Adicionar Nova</h3>
-                    <p style="font-size: 0.85rem; color: #64748B;">Crie grupos como 'Eletrônicos', 'Decoração' ou 'Papelaria'.</p>
+            <section class="card" id="secao-cadastro">
+                <div id="bloco-botao" style="text-align: center; padding: 20px 0;">
+                    <i class="fa-solid fa-folder-plus"
+                        style="font-size: 3rem; color: var(--accent-blue); margin-bottom: 20px;"></i>
+                    <h3>Nova Categoria</h3>
+                    <p style="font-size: 0.85rem; color: #64748B; margin-bottom: 25px;">
+                        Clique abaixo para adicionar uma nova categoria de produtos.
+                    </p>
+                    <button type="button" class="btn btn-main" onclick="mostrarFormulario()"
+                        style="width: 100%; justify-content: center;">
+                        <i class="fa-solid fa-plus" style="margin-right: 8px; color: white;"></i> Cadastrar Categoria
+                    </button>
                 </div>
 
-                <form action="/categorias" method="POST">
-                    <div class="form-group">
-                        <label for="nome">Nome da Categoria</label>
-                        <input type="text" id="nome" name="nome" placeholder="Ex: Vestuário" required>
+                <div id="bloco-formulario" style="display: none;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3 style="margin: 0;">Nova Categoria</h3>
+                        <button onclick="esconderFormulario()"
+                            style="background: none; border: none; color: #94A3B8; cursor: pointer;">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
                     </div>
-                    
-                    <button type="submit" class="btn btn-main" style="width: 100%; justify-content: center;">
-                        Finalizar Cadastro
-                    </button>
-                </form>
+
+                    <form action="/categorias" method="POST">
+                        <div class="form-group">
+                            <label for="nome">Nome da Categoria</label>
+                            <input type="text" id="nome" name="nome" placeholder="Ex: Vestuário" required>
+                        </div>
+                        <div class="form-group" style="margin-top: 10px; ">
+                            <label for="descricao">Descrição</label>
+                            <input type="text" id="descricao" name="descricao"
+                                placeholder="Ex: Roupas masculinas e femininas" required>
+                        </div>
+                        <button type="submit" class="btn btn-main"
+                            style="width: 100%; justify-content: center; margin-top: 20px; font-size: 15px;">
+                            Finalizar Cadastro
+                        </button>
+                        <button type="button" onclick="esconderFormulario()" class="btn"
+                            style="width: 100%; justify-content: center; background: #f1f5f9; color: #64748b; margin-top: 10px;">
+                            Cancelar
+                        </button>
+                    </form>
+                </div>
             </section>
 
             <section class="data-table-container">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                     <h3 style="margin: 0; font-size: 1.2rem; color: var(--dark-bg);">Categorias Ativas</h3>
-                    <span style="background: #E0F2FE; color: #0369A1; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;">
+                    <span
+                        style="background: #E0F2FE; color: #0369A1; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;">
                         {{ categorias|length }} TOTAL
                     </span>
                 </div>
@@ -66,15 +94,20 @@
                         <tr>
                             <td style="font-family: monospace; color: #94A3B8;">#{{ "%03d"|format(categoria.id) }}</td>
                             <td style="font-weight: 600; color: var(--dark-bg);">{{ categoria.nome }}</td>
+                            <td style="color: #64748B; font-size: 0.85rem;">{{ categoria.descricao }}</td>
                             <td style="text-align: right;">
-                                <a href="#" title="Editar" style="color: #64748B; margin-right: 15px; transition: 0.3s;"><i class="fa-solid fa-pen-to-square"></i></a>
-                                <a href="#" title="Excluir" style="color: #EF4444; transition: 0.3s;"><i class="fa-solid fa-trash"></i></a>
+                                <a href="#" title="Editar"
+                                    style="color: #64748B; margin-right: 15px; transition: 0.3s;"><i
+                                        class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="#" title="Excluir" style="color: #EF4444; transition: 0.3s;"><i
+                                        class="fa-solid fa-trash"></i></a>
                             </td>
                         </tr>
                         {% else %}
                         <tr>
                             <td colspan="3" style="text-align: center; padding: 5rem 0;">
-                                <i class="fa-solid fa-inbox" style="font-size: 2.5rem; color: #CBD5E1; margin-bottom: 15px; display: block;"></i>
+                                <i class="fa-solid fa-inbox"
+                                    style="font-size: 2.5rem; color: #CBD5E1; margin-bottom: 15px; display: block;"></i>
                                 <span style="color: #94A3B8;">Nenhuma categoria encontrada no banco de dados.</span>
                             </td>
                         </tr>
@@ -89,8 +122,9 @@
         <div style="margin-bottom: 10px;">
             <i class="fa-solid fa-shield-halved" style="color: var(--accent-blue);"></i>
         </div>
-        &copy; 2026 LUXE POS — AMBIENTE ADMINISTRATIVO SEGURO
+        &copy; 2026 TOMÉDELUXE — AMBIENTE ADMINISTRATIVO SEGURO
     </footer>
+<script src="./static/scripts.js"></script>
 
 </body>
 </html>
