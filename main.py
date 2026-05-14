@@ -115,3 +115,47 @@ def cadastrar_produtos(
     db.add(novo_produto)
     db.commit()
     return RedirectResponse(url="/produtos", status_code=303)
+
+
+#ATUALIZAR
+@app.get("/produtos/{id}/editar")
+def editar_produto(id: int, request: Request, db: Session = Depends(get_db)):
+    produto = db.query(Produto).filter_by(id=id).first()
+    categorias = db.query(Categoria).all()
+    
+    return templates.TemplateResponse(
+        request,
+        "atualizar_produto.html",
+        {"request": request,
+         "produto": produto,
+         "categorias": categorias
+        }
+    )
+
+@app.post("/produtos/{id}/editar")
+def atualizar_produto(
+    id: int,
+    nome: str = Form(...),
+    preco: float = Form(...),
+    estoque: int = Form(...),
+    categoria_id: str = Form(...),
+    db: Session = Depends(get_db)
+):
+    atualizao_produto = db.query(Produto).filter_by(id=id).first()
+    if atualizao_produto:
+        atualizao_produto.nome = nome
+        atualizao_produto.preco = preco
+        atualizao_produto.estoque = estoque
+        atualizao_produto.categoria_id = categoria_id
+        db.commit()
+    return RedirectResponse(url="/produtos", status_code=303)
+
+
+#DELETAR
+@app.post("/produtos/{id}/deletar")
+def deletar_produto(id: int, db: Session = Depends(get_db)):
+    produto = db.query(Produto).filter_by(id=id).first()
+    if produto:
+        db.delete(produto)
+        db.commit()
+    return RedirectResponse(url="/produtos", status_code=303)
