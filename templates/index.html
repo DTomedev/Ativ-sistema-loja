@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Premium | Sistema de Loja</title>
+    <title>Sistema de Loja | TOMÉDELUXE</title>
     <link rel="stylesheet" href="/static/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
 
     <nav class="navbar">
@@ -20,39 +22,55 @@
 
     <header class="hero">
         <h1>Gestão inteligente para sua <span>Loja.</span></h1>
-        <p>Controle total de categorias e produtos com uma interface pensada na experiência do usuário e na agilidade do seu negócio.</p>
+        <p>Controle total de categorias e produtos com uma interface pensada na experiência do usuário e na agilidade do
+            seu negócio.</p>
     </header>
 
     <main class="container">
+
         <div class="card">
             <i class="fa-solid fa-layer-group"></i>
             <h3>Categorias</h3>
-            <p>Organize seu inventário em grupos estratégicos. Visualize e edite seus setores de Eletrônicos, Alimentos e Vestuário.</p>
-            <a href="/categorias" class="btn btn-main">Explorar Setores <i class="fa-solid fa-arrow-right" style="margin-left: 10px; font-size: 0.8rem;"></i></a>
+            <p>Organize seu inventário em grupos estratégicos. Visualize e edite seus setores de Eletrônicos, Alimentos
+                e Vestuário.</p>
+            <a href="/categorias" class="btn btn-main">Explorar Setores <i class="fa-solid fa-arrow-right"
+                    style="margin-left: 10px; font-size: 0.8rem;"></i></a>
         </div>
 
         <div class="card">
             <i class="fa-solid fa-box-archive"></i>
             <h3>Produtos</h3>
-            <p>Gerenciamento detalhado de itens. Adicione novos produtos, controle preços e vincule-os instantaneamente a categorias.</p>
-            <a href="/produtos" class="btn btn-main">Ver Estoque <i class="fa-solid fa-arrow-right" style="margin-left: 10px; font-size: 0.8rem;"></i></a>
+            <p>Gerenciamento detalhado de itens. Adicione novos produtos, controle preços e vincule-os instantaneamente
+                a categorias.</p>
+            <a href="/produtos" class="btn btn-main">Ver Estoque <i class="fa-solid fa-arrow-right"
+                    style="margin-left: 10px; font-size: 0.8rem;"></i></a>
         </div>
 
-        <div class="card" style="background: var(--dark-bg); color: rgb(255, 255, 255);">
-            <i class="fa-solid fa-chart-pie" style="background: linear-gradient(45deg, #ffffff, #10337e); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
-            <h3 style="color: white;">Insight Rápido</h3>
-            <p style="color: #666;">Status operacional: <span style="color: #4ade80;">Ativo</span></p>
-            <div style="margin-top: 20px; border-top: 1px solid #333; pt: 20px;">
-                <div style="display: flex; justify-content: space-between; margin-top: 15px;">
-                    <span style="font-size: 0.8rem;">Categorias</span>
-                    <span style="font-weight: bold;">03</span>
-                </div>
-                <div style="display: flex; justify-content: space-between; margin-top: 5px;">
-                    <span style="font-size: 0.8rem;">Total Produtos</span>
-                    <span style="font-weight: bold;">09</span>
-                </div>
+
+        <div class="card" style="background: #111827; color: white; border: none;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                <i class="fa-solid fa-chart-pie" style="color: #60A5FA;"></i>
+                <h3 style="color: white; margin: 0; font-size: 1.1rem;">Insight Rápido</h3>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <span style="font-size: 0.85rem; color: #9CA3AF;">Status operacional:</span>
+                <span style="font-size: 0.85rem; color: #10B981; font-weight: 600; margin-left: 5px;">Ativo</span>
+            </div>
+            <hr style="border: 0; border-top: 1px solid #374151; margin: 15px 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <span style="color: #D1D5DB; font-size: 0.9rem;">Categorias</span>
+                <span style="font-family: monospace; font-weight: 700; font-size: 1.1rem;">
+                    {{ "%02d"|format(total_categorias) }}
+                </span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="color: #D1D5DB; font-size: 0.9rem;">Total Produtos</span>
+                <span style="font-family: monospace; font-weight: 700; font-size: 1.1rem;">
+                    {{ "%02d"|format(total_produtos) }}
+                </span>
             </div>
         </div>
+        
     </main>
 
     <footer>
@@ -60,4 +78,5 @@
     </footer>
 
 </body>
+
 </html>

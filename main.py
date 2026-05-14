@@ -12,14 +12,20 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 templates = Jinja2Templates(directory="templates")
 
-@app.get("/")
-def exibir_home(request: Request):
-    return templates.TemplateResponse(
-        request,
-        "index.html",
-        {"request": request}
 
-    )
+# INDEX e INSIGHTS
+@app.get("/")
+def dashboard(request: Request, db: Session = Depends(get_db)):
+    total_produtos = db.query(Produto).count()
+    total_categorias = db.query(Categoria).count()
+    return templates.TemplateResponse(
+       request,
+       "index.html", 
+        {"request": request,
+         "total_categorias": total_categorias,
+         "total_produtos": total_produtos
+        })
+
 
 #FUNÇÕES CATEGORIA
 #LISTAR
@@ -60,7 +66,6 @@ def deletar_categoria(id: int, db: Session = Depends(get_db)):
 def editar_categoria(id: int, request: Request, db: Session = Depends(get_db)):
     categoria = db.query(Categoria).filter_by(id=id).first()
     return templates.TemplateResponse(
-        request,
         "atualizar_categoria.html",
         {"request": request,
          "categoria": categoria,
@@ -138,7 +143,7 @@ def atualizar_produto(
     nome: str = Form(...),
     preco: float = Form(...),
     estoque: int = Form(...),
-    categoria_id: str = Form(...),
+    categoria_id: int = Form(...),
     db: Session = Depends(get_db)
 ):
     atualizao_produto = db.query(Produto).filter_by(id=id).first()
