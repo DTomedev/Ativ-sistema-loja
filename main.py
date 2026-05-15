@@ -16,14 +16,29 @@ templates = Jinja2Templates(directory="templates")
 # INDEX e INSIGHTS
 @app.get("/")
 def dashboard(request: Request, db: Session = Depends(get_db)):
+    # Contar o número total de produtos e categorias
     total_produtos = db.query(Produto).count()
     total_categorias = db.query(Categoria).count()
+
+    # Calcular o valor total do estoque (preço * quantidade) para todos os produtos
+    todos_produtos = db.query(Produto).all()
+    valor_total = sum(produto.preco * produto.estoque for produto in todos_produtos)
+
+    # Listar os 5 produtos com estoque crítico (menos de 10 unidades)
+    estoque_critico = db.query(Produto).filter(Produto.estoque < 10).limit(5).all()
+    
+    # Listar os 5 produtos mais recentes
+    recentes = db.query(Produto).order_by(Produto.id.desc()).limit(5).all()
+
     return templates.TemplateResponse(
        request,
        "index.html", 
         {"request": request,
          "total_categorias": total_categorias,
-         "total_produtos": total_produtos
+         "total_produtos": total_produtos,
+         "valor_total": valor_total,
+         "estoque_critico": estoque_critico,
+         "recentes": recentes
         })
 
 

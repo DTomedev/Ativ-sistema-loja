@@ -1,16 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
 :root {
-    --primary-blue: #1E3A8A;       /* Azul Marinho Profundo */
-    --accent-blue: #3B82F6;        /* Azul Vibrante de Ação */
-    --dark-bg: #0F172A;             /* Azul Petróleo Quase Preto */
+    --primary-blue: #1E3A8A;
+    /* Azul Marinho Profundo */
+    --accent-blue: #3B82F6;
+    /* Azul Vibrante de Ação */
+    --dark-bg: #0F172A;
+    /* Azul Petróleo Quase Preto */
     --glass-white: rgba(255, 255, 255, 0.95);
     --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     --bg-body: #F1F5F9;
 }
 
-/* Estrutura para garantir rolagem e corpo sólido */
-html, body {
+html,
+body {
     height: 100%;
 }
 
@@ -20,19 +23,22 @@ body {
     background: var(--bg-body);
     color: #334155;
     display: flex;
-    flex-direction: column; /* Faz o footer ser empurrado para baixo */
+    flex-direction: column;
+    /* Faz o footer ser empurrado para baixo */
 }
 
 main {
-    flex: 1 0 auto; /* Garante que o conteúdo cresça e permita rolagem */
+    flex: 1 0 auto;
 }
 
-/* Background Decorativo */
+
 body::before {
     content: "";
     position: fixed;
-    top: 0; right: 0;
-    width: 300px; height: 300px;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 300px;
     background: radial-gradient(circle, rgba(30, 58, 138, 0.05) 0%, transparent 70%);
     z-index: -1;
 }
@@ -48,7 +54,7 @@ body::before {
     position: sticky;
     top: 0;
     z-index: 1000;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .nav-logo {
@@ -67,7 +73,9 @@ body::before {
     font-size: 0.9rem;
 }
 
-.nav-links a:hover { color: var(--accent-blue); }
+.nav-links a:hover {
+    color: var(--accent-blue);
+}
 
 /* Hero Section */
 .hero {
@@ -82,7 +90,9 @@ body::before {
     color: var(--dark-bg);
 }
 
-.hero h1 span { color: var(--primary-blue); }
+.hero h1 span {
+    color: var(--primary-blue);
+}
 
 .hero p {
     font-size: 1.1rem;
@@ -99,12 +109,44 @@ body::before {
     padding: 2rem 10% 4rem 10%;
 }
 
+.dashboard-sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.section-card {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.dashboard-table td {
+    padding: 12px 8px;
+    border-bottom: 1px solid #f3f4f6;
+    color: #374151;
+    font-size: 0.95rem;
+}
+
+.dashboard-table tr:last-child td {
+    border-bottom: none;
+}
+
 .card {
     background: white;
     padding: 40px;
     border-radius: 24px;
-    border: 1px solid rgba(0,0,0,0.03);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
     transition: var(--transition);
 }
 
@@ -118,7 +160,7 @@ body::before {
     background: white;
     border-radius: 24px;
     padding: 2rem;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
     margin-bottom: 3rem;
 }
 
@@ -142,7 +184,8 @@ td {
 }
 
 /* Inputs e Botões */
-input, select {
+input,
+select {
     width: 100%;
     padding: 12px 20px;
     border-radius: 12px;
@@ -186,7 +229,7 @@ footer {
     flex-shrink: 0;
     padding: 3rem 10%;
     background: white;
-    border-top: 1px solid rgba(0,0,0,0.05);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
     text-align: center;
     font-size: 0.8rem;
     color: #94A3B8;

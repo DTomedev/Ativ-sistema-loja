@@ -20,10 +20,14 @@
         </div>
     </nav>
 
-    <header class="hero">
-        <h1>Gestão inteligente para sua <span>Loja.</span></h1>
-        <p>Controle total de categorias e produtos com uma interface pensada na experiência do usuário e na agilidade do
-            seu negócio.</p>
+    <header class="hero"
+        style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+        <div style="flex: 1; min-width: 300px;">
+            <h1>Gestão inteligente para sua <span>Loja.</span></h1>
+            <p>Controle total de categorias e produtos com uma interface pensada na experiência do usuário e na
+                agilidade do seu negócio.</p>
+        </div>
+
     </header>
 
     <main class="container">
@@ -45,7 +49,6 @@
             <a href="/produtos" class="btn btn-main">Ver Estoque <i class="fa-solid fa-arrow-right"
                     style="margin-left: 10px; font-size: 0.8rem;"></i></a>
         </div>
-
 
         <div class="card" style="background: #111827; color: white; border: none;">
             <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
@@ -70,11 +73,63 @@
                 </span>
             </div>
         </div>
-        
+
+        <div class="dashboard-sections">
+
+            <div class="section-card" style="border-top: 4px solid #EF4444;">
+                <h3
+                    style="margin: 0 0 10px 0; color: #111827; display: flex; align-items: center; gap: 10px; font-size: 1.2rem;">
+                    <i class="fa-solid fa-triangle-exclamation" style="color: #EF4444;"></i> Alerta de Estoque Crítico
+                </h3>
+                <p style="color: #64748B; font-size: 0.85rem; margin: 0;">Produtos com estoque abaixo de 10 unidades.</p>
+                {% if estoque_critico %}
+                <table class="dashboard-table">
+                    <tbody>
+                        {% for item in estoque_critico %}
+                        <tr>
+                            <td>{{ item.nome }}</td>
+                            <td style="text-align: right; color: #EF4444; font-weight: bold; font-family: monospace;">{{
+                                item.estoque }} un.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <p style="color: #64748B; font-size: 0.85rem; margin: 0;">Nenhum item com estoque abaixo do mínimo.</p>
+                {% endif %}
+            </div>
+
+            <div class="section-card" style="border-top: 4px solid #3B82F6; padding: 20px;">
+                <h3
+                    style="margin: 0 0 10px 0; color: #111827; display: flex; align-items: center; gap: 10px; font-size: 1.2rem;">
+                    <i class="fa-solid fa-clock-rotate-left" style="color: #3B82F6;"></i> Adicionados Recentemente
+                </h3>
+                <p style="color: #64748B; font-size: 0.85rem; margin: 0;">Últimos produtos cadastrados no sistema.</p>
+
+                {% if recentes %}
+                <table class="dashboard-table">
+                    <tbody>
+                        {% for item in recentes %}
+                        <tr>
+                            <td>{{ item.nome }}</td>
+                            <td style="text-align: right; color: #4B5563; font-weight: 600; font-family: monospace;">R$
+                                {{ "%.2f"|format(item.preco) }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <p style="color: #94A3B8; font-size: 0.9rem; margin-top: 20px; text-align: center;">Nenhum produto
+                    cadastrado recentemente.</p>
+                {% endif %}
+            </div>
+
+        </div>
+
     </main>
 
     <footer>
-        &copy; 2024 Luxury Retail Systems — Tecnologia de Alta Performance
+        &copy; 2026 Luxury Retail Systems — Tecnologia de Alta Performance
     </footer>
 
 </body>

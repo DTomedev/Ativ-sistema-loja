@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>Editar Categoria | TOMÉDELUXE</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
+
 <body>
     <nav class="navbar">
         <div class="nav-logo">TOMÉ<span style="color: black;">DELUXE</span></div>
@@ -14,7 +16,7 @@
         <section class="card" style="width: 100%; max-width: 500px;">
             <h3><i class="fa-solid fa-pen-to-square"></i> Editar Categoria</h3>
             <p style="font-size: 0.8rem; color: #64748B; margin-bottom: 20px;">ID do registro: #{{ categoria.id }}</p>
-            
+
             <form action="/categorias/{{ categoria.id }}/editar" method="POST">
                 <div class="form-group">
                     <label>Nome da Categoria</label>
@@ -24,13 +26,19 @@
                     <label>Descrição</label>
                     <input type="text" name="descricao" value="{{ categoria.descricao }}" required>
                 </div>
-                
+
                 <div style="display: flex; gap: 10px; margin-top: 20px;">
-                    <button type="submit" class="btn btn-main" style="flex: 2; justify-content: center;">Salvar Alterações</button>
-                    <a href="/categorias" class="btn" style="flex: 1; justify-content: center; background: #f1f5f9; color: #64748b;">Voltar</a>
+                    <button type="submit" class="btn btn-main" style="flex: 2; justify-content: center;">Salvar
+                        Alterações</button>
+                    <a href="/categorias" class="btn"
+                        style="flex: 1; justify-content: center; background: #f1f5f9; color: #64748b;">Voltar</a>
                 </div>
             </form>
         </section>
     </main>
+    <footer>
+        &copy; 2026 TOMÉDELUXE — AMBIENTE DE GESTÃO SOLICITADO
+    </footer>
 </body>
+
 </html>
